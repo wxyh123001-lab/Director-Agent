@@ -1,11 +1,16 @@
 import os
 import sys
+from dotenv import load_dotenv
+
+# 必须在 import graph/agents 之前加载，否则 client 创建时拿不到 key
+load_dotenv(os.path.join(os.path.dirname(__file__), ".env"))
+
 from graph import build_graph
 from state import DirectorState
 
 def run(user_input: str):
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("Error: ANTHROPIC_API_KEY 环境变量未设置")
+    if not os.environ.get("DASHSCOPE_API_KEY"):
+        print("Error: DASHSCOPE_API_KEY 未设置，请检查 .env 文件")
         sys.exit(1)
 
     print(f"\n开始处理：{user_input}\n")

@@ -30,4 +30,5 @@ def parse_json_response(text: str) -> dict:
     # 修剪空白符后再解析
     text = text.strip()
 
-    return json.loads(text)
+    # strict=False 允许 JSON 字符串中包含未转义的控制字符（模型有时会输出）
+    return json.loads(text, strict=False)
