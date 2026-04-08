@@ -13,6 +13,7 @@ class DirectorState(TypedDict):
         output: E agent 最终输出
     """
     user_input: str
+    search: dict   # Search Agent 输出，USE_SEARCH=false 时为 {}
     story: dict
     script: dict
     scenes: dict

@@ -18,6 +18,7 @@ def run(user_input: str):
 
     initial_state: DirectorState = {
         "user_input": user_input,
+        "search": {},
         "story": {},
         "script": {},
         "scenes": {},

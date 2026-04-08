@@ -12,6 +12,12 @@ SYSTEM_PROMPT = """你是一位专业的故事分析师。
   "perspective": "叙事视角（第一人称/第三人称/多视角）"
 }"""
 
+
 def story_node(state: DirectorState) -> dict:
-    text = chat(SYSTEM_PROMPT, state["user_input"], max_tokens=512)
+    search_context = state.get("search", {}).get("results", "")
+    if search_context:
+        user_content = f"网络参考资料：\n{search_context}\n\n用户描述：{state['user_input']}"
+    else:
+        user_content = state["user_input"]
+    text = chat(SYSTEM_PROMPT, user_content, max_tokens=512)
     return {"story": parse_json_response(text)}
