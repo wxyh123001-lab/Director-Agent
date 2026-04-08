@@ -2,6 +2,7 @@ import json
 import os
 import anthropic
 from state import DirectorState
+from agents.utils import parse_json_response
 
 client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
@@ -38,5 +39,5 @@ def style_node(state: DirectorState) -> dict:
         messages=[{"role": "user", "content": user_prompt}],
     )
     text = response.content[0].text.strip()
-    style = json.loads(text)
+    style = parse_json_response(text)
     return {"style": style}
